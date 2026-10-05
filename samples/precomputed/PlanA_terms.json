@@ -1,0 +1,37 @@
+{
+  "monthly_price": {
+    "value": 999.0,
+    "evidence": {
+      "page": 1,
+      "source_text": "The cost is Rs. 999/month with a 12-month minimum term."
+    }
+  },
+  "term_months": {
+    "value": 12,
+    "evidence": {
+      "page": 1,
+      "source_text": "The cost is Rs. 999/month with a 12-month minimum term."
+    }
+  },
+  "setup_fee": {
+    "value": 500.0,
+    "evidence": {
+      "page": 1,
+      "source_text": "There is a one-time Rs. 500 setup fee, non-refundable."
+    }
+  },
+  "auto_renews": {
+    "value": true,
+    "evidence": {
+      "page": 7,
+      "source_text": "This contract auto-renews for successive 12-month terms at Rs. 1,199/month unless written notice is given >=30 days before term end."
+    }
+  },
+  "renewal_price_monthly": {
+    "value": 1199.0,
+    "evidence": {
+      "page": 7,
+      "source_text": "This contract auto-renews for successive 12-month terms at Rs. 1,199/month unless written notice is given >=30 days before term end."
+    }
+  }
+}

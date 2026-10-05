@@ -1,0 +1,37 @@
+{
+  "monthly_price": {
+    "value": 1199.0,
+    "evidence": {
+      "page": 1,
+      "source_text": "Monthly price is Rs. 1,199/month for a 12-month term."
+    }
+  },
+  "term_months": {
+    "value": 12,
+    "evidence": {
+      "page": 1,
+      "source_text": "Monthly price is Rs. 1,199/month for a 12-month term."
+    }
+  },
+  "setup_fee": {
+    "value": 0.0,
+    "evidence": {
+      "page": 1,
+      "source_text": "There is no setup fee."
+    }
+  },
+  "auto_renews": {
+    "value": false,
+    "evidence": {
+      "page": 7,
+      "source_text": "There is no auto-renewal. The contract simply ends at term end."
+    }
+  },
+  "cancellation_notice_days": {
+    "value": 7,
+    "evidence": {
+      "page": 9,
+      "source_text": "Requires a 7-day cancellation notice."
+    }
+  }
+}

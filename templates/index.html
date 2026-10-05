@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinePrint - Evidence-first Contract Analyst</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #fafafa; }
+    </style>
+</head>
+<body class="text-gray-800 min-h-screen flex flex-col items-center py-12">
+    
+    <header class="text-center mb-10 w-full max-w-xl px-4">
+        <h1 class="text-4xl font-bold text-gray-900 mb-3 tracking-tight">FinePrint</h1>
+        <p class="text-gray-500">Evidence-first AI analyst for consumer contracts.</p>
+    </header>
+
+    <main class="w-full max-w-lg bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+        
+        <!-- Tabs -->
+        <div class="flex border-b border-gray-200 mb-8">
+            <button onclick="switchTab('analyze')" id="tab-analyze" class="pb-3 text-sm font-medium border-b-2 border-blue-600 text-blue-600 flex-1 transition-colors">Analyze Single</button>
+            <button onclick="switchTab('compare')" id="tab-compare" class="pb-3 text-sm font-medium border-b-2 border-transparent text-gray-500 hover:text-gray-700 flex-1 transition-colors">Compare Two</button>
+        </div>
+
+        <!-- Analyze Form -->
+        <form action="/fineprint/analyze" method="post" enctype="multipart/form-data" class="flex flex-col space-y-6" id="form-analyze">
+            <div class="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-blue-500 transition-colors cursor-pointer">
+                <input type="file" name="file" id="file" accept=".pdf" class="hidden" required onchange="updateFileName(this, 'fileLabel')">
+                <label for="file" class="cursor-pointer flex flex-col items-center">
+                    <svg class="w-12 h-12 text-gray-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                    <span class="text-sm font-medium text-gray-700" id="fileLabel">Click to upload a PDF</span>
+                </label>
+            </div>
+            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-xl transition-colors flex justify-center items-center submitBtn">
+                <span class="btnText">Analyze Contract</span>
+                <svg class="spinner animate-spin ml-2 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+            </button>
+        </form>
+
+        <!-- Compare Form -->
+        <form action="/fineprint/compare" method="post" enctype="multipart/form-data" class="hidden flex-col space-y-6" id="form-compare">
+            <div class="grid grid-cols-2 gap-4">
+                <div class="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-blue-500 transition-colors cursor-pointer">
+                    <input type="file" name="file1" id="file1" accept=".pdf" class="hidden" required onchange="updateFileName(this, 'fileLabel1')">
+                    <label for="file1" class="cursor-pointer flex flex-col items-center">
+                        <svg class="w-8 h-8 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                        <span class="text-xs font-medium text-gray-700" id="fileLabel1">Contract A</span>
+                    </label>
+                </div>
+                <div class="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-blue-500 transition-colors cursor-pointer">
+                    <input type="file" name="file2" id="file2" accept=".pdf" class="hidden" required onchange="updateFileName(this, 'fileLabel2')">
+                    <label for="file2" class="cursor-pointer flex flex-col items-center">
+                        <svg class="w-8 h-8 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                        <span class="text-xs font-medium text-gray-700" id="fileLabel2">Contract B</span>
+                    </label>
+                </div>
+            </div>
+            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-xl transition-colors flex justify-center items-center submitBtn">
+                <span class="btnText">Compare Contracts</span>
+                <svg class="spinner animate-spin ml-2 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+            </button>
+        </form>
+    </main>
+    
+    <footer class="mt-auto py-8 text-center text-xs text-gray-400">
+        Informational document analysis only. Not legal advice.
+    </footer>
+
+    <script>
+        function switchTab(tab) {
+            if(tab === 'analyze') {
+                document.getElementById('form-analyze').style.display = 'flex';
+                document.getElementById('form-compare').style.display = 'none';
+                document.getElementById('tab-analyze').classList.add('border-blue-600', 'text-blue-600');
+                document.getElementById('tab-analyze').classList.remove('border-transparent', 'text-gray-500');
+                document.getElementById('tab-compare').classList.remove('border-blue-600', 'text-blue-600');
+                document.getElementById('tab-compare').classList.add('border-transparent', 'text-gray-500');
+            } else {
+                document.getElementById('form-analyze').style.display = 'none';
+                document.getElementById('form-compare').style.display = 'flex';
+                document.getElementById('tab-compare').classList.add('border-blue-600', 'text-blue-600');
+                document.getElementById('tab-compare').classList.remove('border-transparent', 'text-gray-500');
+                document.getElementById('tab-analyze').classList.remove('border-blue-600', 'text-blue-600');
+                document.getElementById('tab-analyze').classList.add('border-transparent', 'text-gray-500');
+            }
+        }
+
+        function updateFileName(input, labelId) {
+            const label = document.getElementById(labelId);
+            if (input.files && input.files[0]) {
+                label.textContent = input.files[0].name.substring(0, 20) + (input.files[0].name.length > 20 ? '...' : '');
+                label.classList.add('text-blue-600');
+            }
+        }
+
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                const btn = this.querySelector('.submitBtn');
+                this.querySelector('.btnText').textContent = 'Processing...';
+                this.querySelector('.spinner').classList.remove('hidden');
+                btn.classList.add('opacity-80', 'cursor-not-allowed');
+            });
+        });
+    </script>
+</body>
+</html>

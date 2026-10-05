@@ -1,0 +1,32 @@
+# Framework & Web
+fastapi
+uvicorn[standard]
+python-multipart
+
+# Core Dependencies
+pydantic>=2.9.0
+pydantic-settings
+python-dotenv
+httpx
+typer
+rich
+
+# AI Providers
+google-genai
+groq
+
+# FinePrint Specific (PDF Analysis)
+pymupdf
+rapidfuzz
+
+# Threat Netra Specific (OSINT Parsing)
+feedparser
+beautifulsoup4
+
+# Database (Future/Threat Netra)
+sqlalchemy
+alembic
+asyncpg>=0.30.0
+
+# Testing
+pytest

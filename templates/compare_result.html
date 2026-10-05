@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparison Results</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #fafafa; }
+    </style>
+</head>
+<body class="text-gray-800 min-h-screen py-8">
+
+    <div class="max-w-5xl mx-auto px-4">
+        <header class="mb-8 flex justify-between items-end border-b border-gray-200 pb-4">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-900 tracking-tight">Contract Comparison</h1>
+                <p class="text-gray-500 mt-1">
+                    <span class="font-medium text-gray-700">{{ filename1 }}</span> vs <span class="font-medium text-gray-700">{{ filename2 }}</span>
+                </p>
+            </div>
+            <a href="/fineprint" class="text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-4 rounded-lg transition-colors">Compare Another</a>
+        </header>
+
+        <section class="mb-10">
+            <h2 class="text-xl font-semibold mb-4 text-gray-900">AI Verdict</h2>
+            <div class="bg-blue-50 rounded-xl p-6 border border-blue-100 shadow-sm">
+                <p class="text-blue-900 leading-relaxed font-medium">{{ verdict }}</p>
+            </div>
+        </section>
+
+        <section class="mb-10">
+            <h2 class="text-xl font-semibold mb-4 text-gray-900">Term-by-Term Breakdown</h2>
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                <table class="w-full text-left text-sm">
+                    <thead class="bg-gray-50 border-b border-gray-100 text-gray-600 uppercase text-[11px] font-bold tracking-wider">
+                        <tr>
+                            <th class="py-4 px-6 w-1/4">Term</th>
+                            <th class="py-4 px-6 w-1/4 text-center">{{ filename1 }}</th>
+                            <th class="py-4 px-6 w-1/4 text-center">{{ filename2 }}</th>
+                            <th class="py-4 px-6 w-1/4 text-center">Difference</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-50">
+                        {% for row in rows %}
+                        <tr class="hover:bg-gray-50/50 transition-colors">
+                            <td class="py-4 px-6 font-semibold text-gray-800">{{ row.label }}</td>
+                            <td class="py-4 px-6 text-center text-gray-600">
+                                {{ row.A_val }} 
+                                {% if row.A_ev %}<span class="text-xs text-gray-400">({{ row.A_ev }})</span>{% endif %}
+                            </td>
+                            <td class="py-4 px-6 text-center text-gray-600">
+                                {{ row.B_val }}
+                                {% if row.B_ev %}<span class="text-xs text-gray-400">({{ row.B_ev }})</span>{% endif %}
+                            </td>
+                            <td class="py-4 px-6 text-center">
+                                {% if row.diff %}
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                        Different
+                                    </span>
+                                {% else %}
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        Same
+                                    </span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer class="py-8 text-center text-xs text-gray-400 border-t border-gray-200">
+            Informational document analysis only. Not legal advice.
+        </footer>
+    </div>
+</body>
+</html>

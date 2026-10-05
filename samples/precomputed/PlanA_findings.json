@@ -1,0 +1,40 @@
+{
+  "findings": [
+    {
+      "id": "F1",
+      "category": "automatic_renewal",
+      "severity": "high",
+      "title": "Auto-Renewal and Price Increase",
+      "page": 7,
+      "clause_ref": "8.2",
+      "source_text": "This contract auto-renews for successive 12-month terms at Rs. 1,199/month unless written notice is given >=30 days before term end.",
+      "explanation": "Contract automatically renews at a higher price without 30 days notice.",
+      "potential_consequence": "Unexpected charges at a higher rate.",
+      "missing_information": []
+    },
+    {
+      "id": "F2",
+      "category": "early_termination",
+      "severity": "high",
+      "title": "Early Termination Fee",
+      "page": 9,
+      "clause_ref": "11.4",
+      "source_text": "If you terminate early, the early termination fee equals 50% of remaining monthly fees.",
+      "explanation": "You must pay half the remaining contract value if you cancel.",
+      "potential_consequence": "High cost to exit the contract early.",
+      "missing_information": []
+    },
+    {
+      "id": "F3",
+      "category": "refunds",
+      "severity": "medium",
+      "title": "Refund Restriction",
+      "page": 4,
+      "clause_ref": "3.1",
+      "source_text": "Refunds are restricted. They are only provided for an outage over 7 consecutive days.",
+      "explanation": "Refunds are severely limited.",
+      "potential_consequence": "You will not get money back for most issues.",
+      "missing_information": []
+    }
+  ]
+}
